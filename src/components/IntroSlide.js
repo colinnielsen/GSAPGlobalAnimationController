@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TweenMax, Expo, TimelineLite } from 'gsap';
 import Image from '../components/image';
 import IntroSlideText from '../components/IntroSlideText';
@@ -47,7 +47,8 @@ const IntroSlide = () => {
             .to(imageRevealBlockRef.current, .75, {left: '15%',width: '20%', ease: Expo.easeOut})
             .from(imageContainerRef.current, 0, {opacity: 0, visibility: 'hidden'})
             .to(imageRevealBlockRef.current, .6, {left: '35%',width: '0%', ease: Expo.easeInOut})
-            .play();
+            .play()
+            // .addCallback(() => props.triggerLookBookTimeline());
     }, []);
 
     return (

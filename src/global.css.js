@@ -20,6 +20,8 @@ const GlobalCSS = createGlobalStyle`
         font-size: 100%;
         font: inherit;
         vertical-align: baseline;
+        font-family: 'Bristol';
+
     }
     body {
         height: 100vh;
