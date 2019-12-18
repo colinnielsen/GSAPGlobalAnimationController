@@ -28,14 +28,14 @@ const ImageRevealBlock = styled.div`
    background-color: #585858;
 `;
 
-const LeftSlide = (props) => {
+const LeftSlide = () => {
    const LeftSlideRef = useRef(null);
    const imageContainerRef = useRef(null);
    const imageRevealBlockRef = useRef(null);
 
    useEffect(() => {
+      
       const timeline = new TimelineLite();
-      console.log(props.pause)
       timeline
          .add(
             TweenMax.from(LeftSlideRef.current, 2, {
@@ -47,7 +47,7 @@ const LeftSlide = (props) => {
          .to(imageRevealBlockRef.current, .75, { left: '15%', width: '20%', ease: Expo.easeOut })
          .from(imageContainerRef.current, 0, { opacity: 0, visibility: 'hidden' })
          .to(imageRevealBlockRef.current, .6, { left: '35%', width: '0%', ease: Expo.easeInOut });
-   })
+   },)
 
    return (
       <LeftSlideContainer ref={LeftSlideRef}>
