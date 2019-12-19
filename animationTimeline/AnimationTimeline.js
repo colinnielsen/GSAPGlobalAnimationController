@@ -1,49 +1,51 @@
-import { createStore, dispatch } from 'redux';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 
-//actions
-const animateComponent = component => ({
-   component,
-   paused: false,
-});
+export const AnimationTimelineContext = createContext();
 
-const pauseComponent = component => ({
-   component,
-   paused: true,
-});
+export const AnimationProvider = props => {
+   const componentDefaults = [
+      {
+         component: 'LeftSlide',
+         paused: true
+      },
+      {
+         component: 'RightSlide',
+         paused: true
+      },
+      {
+         component: 'SecondSlide',
+         paused: true
+      }
+   ]
+   const [components, setComponents] = useState(componentDefaults);
 
-const initialState = [
-   {
-      component: 'comp',
-      paused: true
-   }
-]
-
-const reducer = (state = initialState, action) => {
-   const { component, paused, type } = action;
-   switch (type) {
-      case 'PLAY':
-         return [
-            ...state,
-            {
-               component,
-               paused: false,
-            }
-         ];
-      case 'PAUSE':
-         return [
-            ...state,
-            {
-               component,
-               paused: true
-            }
-         ];
-      default:
-         return state;
-   }
+   return (
+      <AnimationTimelineContext.Provider value={[components, setComponents]}>
+         {props.children}
+      </AnimationTimelineContext.Provider>
+   )
 }
 
-export const store = createStore(reducer);
+export const AnimationTimeline = () => {
+   const [components, setComponents] = useContext(AnimationTimelineContext);
 
-// const AnimationTimeline = (argumemnts) => {
-//    const { argumemnts } = componentsToAnimate;
-// }
+   useEffect(() => {
+      setComponents([
+         components.map(comp => {
+            if (comp.component !== 'LeftSlide') {
+               return {
+                  ...comp
+               }
+            } else {
+               return {
+                  ...comp,
+                  paused: false,
+               }
+            }
+         })
+      ]);
+      console.log(components)
+   }, []);
+
+   return null;
+}

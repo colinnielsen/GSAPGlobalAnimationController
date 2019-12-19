@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { TweenMax, Expo, TimelineLite } from 'gsap';
+import { AnimationTimelineContext } from '../../animationTimeline/AnimationTimeline';
 import Image from './image';
 import styled from 'styled-components';
 
@@ -29,13 +30,20 @@ const ImageRevealBlock = styled.div`
 `;
 
 const LeftSlide = () => {
+   const [components, setComponents] = useContext(AnimationTimelineContext);
+
    const LeftSlideRef = useRef(null);
    const imageContainerRef = useRef(null);
    const imageRevealBlockRef = useRef(null);
 
    useEffect(() => {
-      
+      console.log('render');
+      const comp = components.filter(comp => comp.component === LeftSlide.name)[0];
+      console.log(comp)
+      // const isPaused = !!comp && !!comp.paused? comp.paused : true;
+      // console.log(comp.paused)
       const timeline = new TimelineLite();
+
       timeline
          .add(
             TweenMax.from(LeftSlideRef.current, 2, {
@@ -47,7 +55,7 @@ const LeftSlide = () => {
          .to(imageRevealBlockRef.current, .75, { left: '15%', width: '20%', ease: Expo.easeOut })
          .from(imageContainerRef.current, 0, { opacity: 0, visibility: 'hidden' })
          .to(imageRevealBlockRef.current, .6, { left: '35%', width: '0%', ease: Expo.easeInOut });
-   },)
+   })
 
    return (
       <LeftSlideContainer ref={LeftSlideRef}>
