@@ -8,3 +8,5 @@ The animationTimeline context 'provider' is wrapped around the whole application
 
 The rough draft of a animated child tied to the context and it's parameters can be found: [here](https://github.com/colinnielsen/gatsbyGSAPLandingPage/blob/master/src/components/RightSlide.js)
 
+Output:
+![](animationtimelineproject.gif)
