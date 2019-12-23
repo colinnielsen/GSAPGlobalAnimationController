@@ -1,0 +1,1 @@
+a conceptual project attempting to use hooks and context as a global animation controller that actions and controls the animations of components from a global function instead of individually within the component.
