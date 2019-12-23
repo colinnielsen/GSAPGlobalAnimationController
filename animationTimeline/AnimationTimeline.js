@@ -3,20 +3,15 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 export const AnimationTimelineContext = createContext();
 
 export const AnimationProvider = props => {
-   const componentDefaults = [
-      {
-         component: 'LeftSlide',
+   const componentDefaults = {
+      'LeftSlide': {
          paused: true
       },
-      {
-         component: 'RightSlide',
+      'RightSlide': {
          paused: true
       },
-      {
-         component: 'SecondSlide',
-         paused: true
-      }
-   ]
+   }
+
    const [components, setComponents] = useState(componentDefaults);
 
    return (
@@ -30,22 +25,15 @@ export const AnimationTimeline = () => {
    const [components, setComponents] = useContext(AnimationTimelineContext);
 
    useEffect(() => {
-      setComponents([
-         components.map(comp => {
-            if (comp.component !== 'LeftSlide') {
-               return {
-                  ...comp
-               }
-            } else {
-               return {
-                  ...comp,
-                  paused: false,
-               }
-            }
-         })
-      ]);
-      console.log(components)
+      animateComponent('LeftSlide', {paused: false }, 0);
+      animateComponent('RightSlide', {paused: false }, 1000);
    }, []);
+
+   const animateComponent = (componentToUpdate, newSettings, delay) => {
+      setTimeout(() => {
+         setComponents({...components, [componentToUpdate]: newSettings});
+      }, delay);
+   } 
 
    return null;
 }

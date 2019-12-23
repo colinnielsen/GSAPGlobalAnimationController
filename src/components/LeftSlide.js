@@ -7,10 +7,9 @@ import styled from 'styled-components';
 const LeftSlideContainer = styled.div`
    max-height: 100vh;
    height: 100vh;
-   width: 50%;
+   width: 0%;
    overflow-y: hidden;
    background-color: #C23816;
-   width: 50vw;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -37,25 +36,25 @@ const LeftSlide = () => {
    const imageRevealBlockRef = useRef(null);
 
    useEffect(() => {
-      console.log('render');
-      const comp = components.filter(comp => comp.component === LeftSlide.name)[0];
-      console.log(comp)
-      // const isPaused = !!comp && !!comp.paused? comp.paused : true;
-      // console.log(comp.paused)
-      const timeline = new TimelineLite();
+      console.log('rendering leftSlide');
+      const comp = components[LeftSlide.name];
+      const isPaused = comp && comp.paused ? comp.paused : false;
+      if (!isPaused) {
+         const timeline = new TimelineLite();
 
-      timeline
-         .add(
-            TweenMax.from(LeftSlideRef.current, 2, {
-               width: '0%',
-               ease: Expo.easeInOut
-            })
-         )
-         .to(imageRevealBlockRef.current, 0, { left: '15%', width: '0%' })
-         .to(imageRevealBlockRef.current, .75, { left: '15%', width: '20%', ease: Expo.easeOut })
-         .from(imageContainerRef.current, 0, { opacity: 0, visibility: 'hidden' })
-         .to(imageRevealBlockRef.current, .6, { left: '35%', width: '0%', ease: Expo.easeInOut });
-   })
+         timeline
+            .add(
+               TweenMax.to(LeftSlideRef.current, 2, {
+                  width: '50%',
+                  ease: Expo.easeInOut
+               })
+            )
+            .to(imageRevealBlockRef.current, 0, { left: '15%', width: '0%' })
+            .to(imageRevealBlockRef.current, .75, { left: '15%', width: '20%', ease: Expo.easeOut })
+            .from(imageContainerRef.current, 0, { opacity: 0, visibility: 'hidden' })
+            .to(imageRevealBlockRef.current, .6, { left: '35%', width: '0%', ease: Expo.easeInOut });
+      }
+   });
 
    return (
       <LeftSlideContainer ref={LeftSlideRef}>
