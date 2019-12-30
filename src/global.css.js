@@ -32,7 +32,7 @@ const GlobalCSS = createGlobalStyle`
    }
    @font-face {
       font-family: "Bristol";
-      src: url("../public/static/fonts/Bristol.otf");
+      src: url("../src/fonts/Bristol.otf");
    }
 `;
 
