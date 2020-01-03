@@ -1,6 +1,6 @@
 ## A conceptual project attempting to use hooks and context as a global animation controller that actions and controls the animations of components from a global function instead of individually within the component.
 
-## __The goal here is to encapsulate the burried animation instructions into a semantic global state.__
+### __The goal here is to encapsulate the burried animation instructions into a semantic global state.__
 
 * As of now components LeftSlide and RightSlide's animation timelines are both being built and triggered off of the global AnimationTimeline Context: [here](https://github.com/colinnielsen/gatsbyGSAPLandingPage/blob/master/animationTimeline/AnimationTimeline.js)
 
