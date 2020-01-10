@@ -16,3 +16,5 @@ Output:
 ### TODOs
 * Change appraoch to use component 'refs' in order to access each component's specific timeline object.
 * Optimize each component to clean-up unnecessary memory usage after unmount
+
+.
